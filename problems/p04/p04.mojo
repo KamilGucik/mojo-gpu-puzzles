@@ -15,10 +15,11 @@ fn add_10_2d(
     a: UnsafePointer[Scalar[dtype]],
     size: Int,
 ):
-    row = thread_idx.y
-    col = thread_idx.x
-    # FILL ME IN (roughly 2 lines)
-
+    local_i = thread_idx.x
+    local_j = thread_idx.y
+    if local_i < size and local_j < size:
+        index = local_j * size + local_i
+        out[index] = a[index] + 10
 
 # ANCHOR_END: add_10_2d
 
